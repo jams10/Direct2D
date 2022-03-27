@@ -1,1 +1,3 @@
-﻿  Direct2D_Tutorial.vcxproj -> C:\Users\y0ngm\source\repos\Direct2D\Direct2D_Tutorial\x64\Debug\Direct2D_Tutorial.exe
+﻿  main.cpp
+C:\Users\y0ngm\source\repos\Direct2D\Direct2D_Tutorial\Direct2D_Tutorial\main.cpp(18): warning C4715: 'WindowProc': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  Direct2D_Tutorial.vcxproj -> C:\Users\y0ngm\source\repos\Direct2D\Direct2D_Tutorial\x64\Debug\Direct2D_Tutorial.exe
