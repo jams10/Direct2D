@@ -46,6 +46,7 @@ SpriteSheet::SpriteSheet(const wchar_t* filename, Graphics* gfx)
 			WICBitmapPaletteTypeCustom      // 변환 시 사용할 팔레트 translation 타입.
 	);
 
+
 	// 변환기를 이용, Direct2D 비트맵을 생성해줌.
 	gfx->GetRenderTarget()->CreateBitmapFromWicBitmap(
 		wicConverter,						// 변환기.
@@ -58,6 +59,19 @@ SpriteSheet::SpriteSheet(const wchar_t* filename, Graphics* gfx)
 	if (wicDecoder) wicDecoder->Release();
 	if (wicConverter) wicConverter->Release();
 	if (wicFrame) wicFrame->Release();
+
+	spriteWidth = bmp->GetSize().width;
+	spriteHeight = bmp->GetSize().height;
+	spritesNumberInRow = 1;
+}
+
+SpriteSheet::SpriteSheet(const wchar_t* filename, Graphics* gfx, int spriteWidth, int spriteHeight)
+	:
+	SpriteSheet(filename, gfx)
+{
+	this->spriteWidth = spriteWidth;
+	this->spriteHeight = spriteHeight;
+	this->spritesNumberInRow = (int)bmp->GetSize().width / spriteWidth;
 }
 
 SpriteSheet::~SpriteSheet()
@@ -74,5 +88,28 @@ void SpriteSheet::Draw()
 		1.0f,																   // opacity
 		D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR, // 보간 모드
 		D2D1::RectF(0.0f, 0.0f, bmp->GetSize().width, bmp->GetSize().height)   // source Rectangle (그려줄 비트맵 크기)
+	);
+}
+
+void SpriteSheet::Draw(int index, int x, int y)
+{
+	D2D_RECT_F src = D2D1::RectF(
+		(float)((index % spritesNumberInRow) * spriteWidth),
+		(float)((index / spritesNumberInRow) * spriteHeight),
+		(float)((index % spritesNumberInRow) * spriteWidth) + spriteWidth,
+		(float)((index / spritesNumberInRow) * spriteHeight) + spriteHeight
+	);
+
+	D2D_RECT_F dest = D2D1::RectF(
+		x, y,
+		x + spriteWidth, y + spriteHeight
+	);
+
+	gfx->GetRenderTarget()->DrawBitmap(
+		bmp,
+		dest,  // destination Rectangle (그려줄 공간 크기)
+		1.0f,																   // opacity
+		D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR, // 보간 모드
+		src    // source Rectangle (그려줄 비트맵 크기)
 	);
 }

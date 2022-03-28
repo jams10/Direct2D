@@ -9,11 +9,17 @@ class SpriteSheet
 {
 	Graphics* gfx;      // Graphics 클래스 객체에 대한 참조.
 	ID2D1Bitmap* bmp;   // 이미지 파일을 로드해 Direct2D 포맷으로 변환한 비트맵.
+	int spriteWidth;
+	int spriteHeight;
+	int spritesNumberInRow;
+
 public:
 	SpriteSheet(const wchar_t* filename, Graphics* gfx);
+	SpriteSheet(const wchar_t* filename, Graphics* gfx, int spriteWidth, int spriteHeight);
 	~SpriteSheet();
 
 	// 렌더 타겟에 비트맵 그리기.
 	void Draw();
+	void Draw(int index, int x, int y);
 };
 

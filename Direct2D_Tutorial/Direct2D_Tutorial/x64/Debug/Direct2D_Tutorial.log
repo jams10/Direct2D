@@ -1,4 +1,2 @@
-﻿  SpriteSheet.cpp
-C:\Users\y0ngm\source\repos\Direct2D\Direct2D_Tutorial\Direct2D_Tutorial\SpriteSheet.cpp(106,24): warning C4838: 'UINT'에서 'INT'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\y0ngm\source\repos\Direct2D\Direct2D_Tutorial\Direct2D_Tutorial\SpriteSheet.cpp(106,31): warning C4838: 'UINT'에서 'INT'(으)로의 변환에는 축소 변환이 필요합니다.
+﻿  Level1.cpp
   Direct2D_Tutorial.vcxproj -> C:\Users\y0ngm\source\repos\Direct2D\Direct2D_Tutorial\x64\Debug\Direct2D_Tutorial.exe
