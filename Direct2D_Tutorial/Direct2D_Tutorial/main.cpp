@@ -1,6 +1,9 @@
 #include<Windows.h>
 #include "Graphics.h"
 
+#include "Level1.h"
+#include "GameController.h"
+
 Graphics* graphics;
 
 LRESULT CALLBACK WindowProc(
@@ -60,8 +63,7 @@ int WINAPI wWinMain(
 
 	ShowWindow(hWnd, nCmdShow);
 
-	float y = 0.0f;
-	float ySpeed = 0.0f;
+	GameController::LoadInitialLevel(new Level1());
 
 	MSG msg;
 	msg.message = WM_NULL;
@@ -76,20 +78,12 @@ int WINAPI wWinMain(
 		else
 		{
 			// 업데이트
-			ySpeed += 1.0f;
-			y += ySpeed;
-
-			if (y + 50.f > 600)
-			{
-				y = 600.f - 50.f;
-				ySpeed *= -0.8f;
-			}
+			GameController::Update();
 
 			// 렌더링
 			graphics->BeginDraw();
-			graphics->ClearScreen(0.0f, 0.1f, 0.5f);
-
-			graphics->DrawCircle(375.0f, y, 50.f, 0.0f, 1.0f, 0.0f, 1.0f);
+			
+			GameController::Render(graphics);
 
 			graphics->EndDraw();
 		}
