@@ -15,6 +15,8 @@ public:
 
 	bool Init(HWND hWnd);
 
+	ID2D1RenderTarget* GetRenderTarget() { return renderTarget; }
+
 	// Direct2D에서는 렌더 타겟의 BeginDraw() 함수를 호출한다음 렌더링 관련 코드를 써넣고,
 	// EndDraw()를 해야 비로소 설정한 렌더 타겟에 그려진다.
 	void BeginDraw() { renderTarget->BeginDraw(); }

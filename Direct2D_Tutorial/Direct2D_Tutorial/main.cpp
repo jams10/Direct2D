@@ -61,6 +61,8 @@ int WINAPI wWinMain(
 		return -1;
 	}
 
+	GameLevel::Init(graphics);
+
 	ShowWindow(hWnd, nCmdShow);
 
 	GameController::LoadInitialLevel(new Level1());
@@ -83,7 +85,7 @@ int WINAPI wWinMain(
 			// ·»´õ¸µ
 			graphics->BeginDraw();
 			
-			GameController::Render(graphics);
+			GameController::Render();
 
 			graphics->EndDraw();
 		}
