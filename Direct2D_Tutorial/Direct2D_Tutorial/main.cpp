@@ -15,16 +15,6 @@ LRESULT CALLBACK WindowProc(
 		PostQuitMessage(0);
 		return 0;
 	}
-	if (uMsg == WM_PAINT) // 윈도우가 다시 그려질 때 호출되는 메시지.
-	{
-		graphics->BeginDraw();
-
-		graphics->ClearScreen(0.0f, 0.0f, 0.5f);
-
-		graphics->DrawCircle(100, 100, 50, 0.0f, 1.0f, 0.0f, 1.0f);
-
-		graphics->EndDraw();
-	}
 
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
@@ -70,11 +60,39 @@ int WINAPI wWinMain(
 
 	ShowWindow(hWnd, nCmdShow);
 
+	float y = 0.0f;
+	float ySpeed = 0.0f;
+
 	MSG msg;
-	while (GetMessage(&msg, hWnd, 0, 0))
+	msg.message = WM_NULL;
+
+	while (msg.message != WM_QUIT)
 	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		else
+		{
+			// 업데이트
+			ySpeed += 1.0f;
+			y += ySpeed;
+
+			if (y + 50.f > 600)
+			{
+				y = 600.f - 50.f;
+				ySpeed *= -0.8f;
+			}
+
+			// 렌더링
+			graphics->BeginDraw();
+			graphics->ClearScreen(0.0f, 0.1f, 0.5f);
+
+			graphics->DrawCircle(375.0f, y, 50.f, 0.0f, 1.0f, 0.0f, 1.0f);
+
+			graphics->EndDraw();
+		}
 	}
 
 	return 0;

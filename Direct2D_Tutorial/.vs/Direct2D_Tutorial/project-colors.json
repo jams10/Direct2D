@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "83987156-9a3f-48a8-902b-235b1f92da55": {
+      "ProjectGuid": "83987156-9a3f-48a8-902b-235b1f92da55",
+      "DisplayName": "Direct2D_Tutorial",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
